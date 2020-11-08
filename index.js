@@ -1,6 +1,6 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
-
+// ["title", "description", "install", "usage", "issues", "contribution", "testInstructions", "liscense", "github", "email"]
 // array of questions for user
 const questions = [
   {
