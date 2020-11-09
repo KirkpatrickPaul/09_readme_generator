@@ -41,74 +41,80 @@ function generateMarkdown(data) {
 
   return `# ${data.title}
 
-  ## Table of Contents      ${licenseLogo}
+${licenseLogo}
 
-  * [Description](#Description)
-  * [Installation Guide](#Installation-Guide)
-  * [Usage Guide](#Usage-Guide)${
-    data.issues !== "N/A"
-      ? `
-  * [Reporting Issues](#Reporting-Issues)`
-      : ""
-  } ${
-    data.contribution !== "N/A"
-      ? `
-  * [Contribution Guide](#Contribution-Guide)`
-      : ""
-  }${
-    data.testInstructions !== "N/A"
-      ? `
-  * [Test Instructions](#Test-Instructions)`
-      : ""
-  }
-  * [Questions](#Questions)
-  * [License Information](#License-Information)
+## Table of Contents
 
-  ## Description
+* [Description](#Description)
+* [Installation Guide](#Installation-Guide)
+* [Usage Guide](#Usage-Guide)${
+data.issues !== "N/A"
+? `
+* [Reporting Issues](#Reporting-Issues)`
+: ""
+} ${
+data.contribution !== "N/A"
+? `
+* [Contribution Guide](#Contribution-Guide)`
+: ""
+}${
+data.testInstructions !== "N/A"
+? `
+* [Test Instructions](#Test-Instructions)`
+: ""
+}
+* [Questions](#Questions)
+* [License Information](#License-Information)
 
-  ${data.description}
+## Description
 
-  ##Installation Guide
+${data.description}
 
-  ${data.install}
+## Installation Guide
 
-  ## Usage Guide
+${data.install}
 
-  ${data.usage} ${
-    data.issues !== "N/A"
-      ? `
-  
-  ## Reporting Issues
-  
-  ${data.issues}`
-      : ""
-  }  ${
-    data.contribution !== "N/A"
-      ? `
-  
+## Usage Guide
+
+${data.usage} ${
+data.issues !== "N/A"
+? `
+
+## Reporting Issues
+
+${data.issues}`
+: ""
+}  ${
+data.contribution !== "N/A"
+? `
+
 ## Contribution Guide
 
 ${data.contribution}`
-      : ""
-  } ${
-    data.testInstructions !== "N/A"
-      ? `
-  
+: ""
+} ${
+data.testInstructions !== "N/A"
+? `
+
 ## Reporting Issues
 
 ${data.testInstructions}`
-      : ""
-  }
+: ""
+}
 
 ## Questions
 
 If you have any questions, please feel free to contact me at [my Github](https://github.com/${
-    data.github
-  }). Or, my email address is ${data.email}.
+data.github
+}). Or, my email address is ${data.email}.
 
 ## License Information
 
-For ${data.title}, I use the ${data.license} license.
+For ${data.title}, I ${
+data.license === "No License"
+? "did not use a license."
+: `use the ${data.license} license.`
+}
 `;
 }
 
