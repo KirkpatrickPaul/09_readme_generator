@@ -1,6 +1,7 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
-// ["title", "description", "install", "usage", "issues", "contribution", "testInstructions", "liscense", "github", "email"]
+const generateMarkdown = require("./utils/generateMarkdown");
+// ["title", "description", "install", "usage", "issues", "contribution", "testInstructions", "license", "github", "email"]
 // array of questions for user
 const questions = [
   {
@@ -27,28 +28,33 @@ const questions = [
     type: "input",
     name: "issues",
     message: "How should a user report issues with your project?",
+    default: "N/A",
   },
   {
     type: "input",
     name: "contribution",
     message: "Please share guidlines for contributing to your project.",
+    default: "N/A",
   },
   {
     type: "input",
     name: "testInstructions",
     message: "What are your test instructions for the project?",
+    default: "N/A",
   },
   {
     type: "list",
-    name: "liscense",
-    message: "Please select the liscense for your project.",
+    name: "license",
+    message: "Please select the license for your project.",
     choices: [
+      "No License",
       "MIT",
       "GNU GPLv3",
       "GNU AGPLv3",
       "GNU LGPLv3",
+      "CC-O",
       "MPL 2.0",
-      "Apache",
+      "Apache 2.0",
       "Boost",
     ],
   },
@@ -65,10 +71,20 @@ const questions = [
 ];
 
 // function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+  fs.writeFile(fileName, data, (error) =>
+    error ? console.error(err) : console.log("Success!")
+  );
+}
 
 // function to initialize program
-function init() {}
+function init() {
+  inquirer
+    .prompt(questions)
+    .then((answers) =>
+      writeToFile("./examples/README.md", generateMarkdown(answers))
+    );
+}
 
 // function call to initialize program
 init();
